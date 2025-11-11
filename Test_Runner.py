@@ -10,10 +10,10 @@ import sys
 # ⚠️ CHANGE 1: Set the key name for YOUR data (e.g., 'st05_df', 'st12_df', etc.)
 # IMPORTANT: This key MUST match the 'stN_df' key used in the main Home Page
 # and accessed by your analysis file.
-STUDENT_DATA_KEY = 'st07_df' 
+STUDENT_DATA_KEY = 'st07_data' 
 
 # ⚠️ CHANGE 2: Set the file path to YOUR Streamlit page (e.g., 'pages/07_⚽_Sports_Analysis.py')
-STUDENT_PAGE_PATH = 'pages/07_⚽_Sports_Analysis.py' 
+STUDENT_PAGE_PATH = 'pages/07_Sports_Analysis.py' 
 
 # ----------------------------------------------------------------------
 # 2. DATA LOADING & REDIRECTION LOGIC (DO NOT EDIT BELOW THIS LINE)
@@ -53,6 +53,8 @@ st.sidebar.warning("This is a temporary file for local testing only.")
 
 # --- Manual Redirection ---
 # In a real MPA, this isn't needed, but for testing, we tell the user what to run.
+
+'''
 if 'streamlit' in sys.modules:
     st.title("Local Test Runner Setup Complete")
     st.info(f"""
@@ -60,3 +62,4 @@ if 'streamlit' in sys.modules:
     
     To view your actual project, please select it on the sidebar.""")
     st.stop()
+'''

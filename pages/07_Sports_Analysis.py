@@ -6,10 +6,10 @@ st.title("⚽ Student A: Sports Results Analysis")
 st.markdown("---")
 
 # Retrieve shared data from the Home page's session state
-if 'student_data' not in st.session_state or st.session_state['student_data']['st07_df'].empty:
+if 'student_data' not in st.session_state or st.session_state['data']['st07_data.csv'].empty:
     st.warning("Data not loaded. Please ensure the main Home Page ran successfully and the data files exist.")
 else:
-    df = st.session_state['student_data']['st07_df']
+    df = st.session_state['data']['st07_data.csv']
 
     # --- Student Introductory Section ---
     st.header("1. Introduction and Project Goal")
