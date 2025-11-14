@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # The actual page content is executed here by Streamlit
-st.title("Crystal Zhao: Popular Articles' Edits Analysis")
+st.title("Crystal Zhao: Popular Articles - Edits Analysis")
 st.markdown("---")
 
 # Retrieve shared data from the Home page's session state
@@ -43,15 +44,22 @@ else:
     
     # --- Analysis Content ---
     if article_df.empty:
-        st.info(f"No home games found for the team '{article_filter}' in the dataset to analyze.")
+        st.info(f"No information in '{article_filter}' to analyze.")
     else:
-        st.subheader(f"2. Patterns in Edits For {article_filter}")
+        st.subheader(f"2. Monthly Edit Frequency for {article_filter}")
         
-        col1, col2 = st.columns(2)
-        
-        # edits per article by month
+        # Prepare data for st.line_chart: set 'year_month' as index
         article_monthly_edits = article_df.groupby('year_month')['revid'].count().reset_index(name='edits')
+        df_chart_data = article_monthly_edits.set_index('year_month')[['edits']]
+        
+        st.line_chart(
+            df_chart_data,
+            y='edits'
+        )
+        st.caption("X-axis: Year-Month, Y-axis: Number of Edits")
 
+        st.subheader(f"3. Patterns in Edits For {article_filter}")
+        col1, col2 = st.columns(2)
         total_edits = len(article_df)
         total_users = article_df['user'].nunique()
         
@@ -60,28 +68,25 @@ else:
                 label="Total Edits Analyzed", 
                 value=f"{total_edits:,.0f}"
             )
+            st.metric(
+                            label="Total Unique Editors", 
+                            value=f"{total_users:,.0f}"
+                        )
             # Display Top 5 Most Active Users
             top_users = article_df['user'].value_counts().head(5).to_frame(name='Edits')
-            st.markdown("**Top 5 Active Users (by edit count):**")
+            st.markdown("**Top 5 Editors (by edit count):**")
             st.dataframe(top_users, use_container_width=True)
-
+            
         with col2:
-            st.metric(
-                label="Total Unique Users", 
-                value=f"{total_users:,.0f}"
-            )
-            # Bar chart showing edit size distribution instead of sports attendance
-            st.markdown("**Edit Size Distribution (First 100 Edits):**")
-            st.bar_chart(article_df.head(100).set_index('time')['size'])
+            st.markdown("**Edit Size Distribution (Histogram):**")
 
-        st.subheader(f"3. Monthly Edit Frequency for {article_filter}")
+            fig, ax = plt.subplots()
+            ax.hist(article_df['size'].dropna(), bins=20, color='skyblue', edgecolor='black')
+            ax.set_xlabel('Edit Size')
+            ax.set_ylabel('Frequency')
+            ax.set_title('Distribution of Edit Sizes')
+            st.pyplot(fig)
+
         
-        # Prepare data for st.line_chart: set 'year_month' as index
-        df_chart_data = article_monthly_edits.set_index('year_month')[['edits']]
         
-        st.line_chart(
-            df_chart_data,
-            y='edits'
-        )
         
-        st.caption("X-axis: Year-Month, Y-axis: Number of Edits")
