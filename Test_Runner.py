@@ -13,7 +13,7 @@ import sys
 STUDENT_DATA_KEY = 'st02_data' 
 
 # ⚠️ CHANGE 2: Set the file path to YOUR Streamlit page (e.g., 'pages/07_⚽_Sports_Analysis.py')
-STUDENT_PAGE_PATH = 'pages/02_Edits_.py' 
+STUDENT_PAGE_PATH = 'pages/02_Edits_Analysis.py' 
 
 # ----------------------------------------------------------------------
 # 2. DATA LOADING & REDIRECTION LOGIC (DO NOT EDIT BELOW THIS LINE)
