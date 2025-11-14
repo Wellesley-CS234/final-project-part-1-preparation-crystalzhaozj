@@ -10,15 +10,19 @@ import sys
 # ⚠️ CHANGE 1: Set the key name for YOUR data (e.g., 'st05_df', 'st12_df', etc.)
 # IMPORTANT: This key MUST match the 'stN_df' key used in the main Home Page
 # and accessed by your analysis file.
-STUDENT_DATA_KEY = 'st07_data' 
+STUDENT_DATA_KEY = 'st02_data' 
 
 # ⚠️ CHANGE 2: Set the file path to YOUR Streamlit page (e.g., 'pages/07_⚽_Sports_Analysis.py')
-STUDENT_PAGE_PATH = 'pages/07_Sports_Analysis.py' 
+STUDENT_PAGE_PATH = 'pages/02_Edits_.py' 
 
 # ----------------------------------------------------------------------
 # 2. DATA LOADING & REDIRECTION LOGIC (DO NOT EDIT BELOW THIS LINE)
 # ----------------------------------------------------------------------
-
+st.set_page_config(
+    page_title="LOCAL TEST RUNNER", 
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 @st.cache_data
 def load_student_data(key_name):
     """Loads only the single required CSV file for testing."""
@@ -27,6 +31,7 @@ def load_student_data(key_name):
     # This ensures the student page finds the correct key, but the loader finds the correct file.
     file_root = key_name.replace('_df', '_data') 
     data_path = os.path.join('data', f"{file_root}.csv")
+    st.write(f"Looking for data file at: {data_path}")  # Debug line
     
     if os.path.exists(data_path):
         st.success(f"Successfully loaded data from {data_path} for testing.")
@@ -42,11 +47,7 @@ if 'student_data' not in st.session_state:
     }
 
 # Ensure the main Streamlit configuration is set
-st.set_page_config(
-    page_title="LOCAL TEST RUNNER", 
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
+
 
 st.sidebar.title("Local Test Mode")
 st.sidebar.warning("This is a temporary file for local testing only.")
