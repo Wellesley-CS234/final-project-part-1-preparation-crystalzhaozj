@@ -22,11 +22,11 @@ else:
     # --- Student Introductory Section ---
     st.header("1. Introduction and Project Goal")
     st.markdown("""
-        **Data Description:** .
+        **Data Description:** This dataset contains the most recent 500 edits for 2 of the most popular CC articles on Wikipedia: Greta Thunberg and Paris Accord Agreement.
         
-        **Question:** 
+        **Question:** What are some patterns in the number/frequency of edits made on widely read CC articles on Wikipedia?
         
-        **Interaction:** Use the selection box below to 
+        **Interaction:** Use the selection box below to select which article you want to examine closer first.
     """)
     st.markdown("---")
     
